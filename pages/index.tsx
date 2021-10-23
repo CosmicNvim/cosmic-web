@@ -24,8 +24,11 @@ const Home: NextPage = () => {
         <div className={styles.install}>
           <a className="button" href="https://github.com/mattleong/CosmicNvim/wiki/Installation">Install</a>
         </div>
+
         <div className="screenshots">
-          <Image className="screenshot" src="/screenshots/hover.png" layout="intrinsic" width={1200} height={600} alt="" />
+          <div className="screenshot">
+            <Image src="/screenshots/hover.png" layout="intrinsic" width={1200} height={600} alt="" />
+          </div>
         </div>
       </main>
     </div>
