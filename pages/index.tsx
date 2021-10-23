@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import { Title, ScreenshotImages, Head } from '../components'
+import { Title, ScreenshotImages, Head, DiscordIcon, GithubIcon } from '../components'
 import styles from "../styles/Home.module.scss";
 
 const Home: NextPage = () => {
@@ -16,6 +16,11 @@ const Home: NextPage = () => {
           development, specifically designed to provide a 💫 COSMIC programming
           experience!
         </p>
+
+        <div>
+          <a className="button discord" href="https://discord.gg/EwdrKzVbvJ" target="_blank" rel="noreferrer"><DiscordIcon /> Discord</a>
+          <a className="button github" href="https://github.com/mattleong/CosmicNvim"><GithubIcon /> Github</a>
+        </div>
 
         <div className={styles.install}>
           <a

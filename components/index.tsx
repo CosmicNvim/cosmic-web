@@ -1,3 +1,5 @@
+export * from './icons/discord'
+export * from './icons/github'
 export * from './screenshots'
 export * from './title'
 export * from './head'

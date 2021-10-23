@@ -17,10 +17,16 @@ a {
     border-radius: 3px;
     padding: 0.5em 1em;
     transition: all 0.2s ease-out;
+    margin: 0 0.3em;
     &:hover {
       color: #1f2335;
       background-color: #3d59a1;
       border: 1px solid #3d59a1;
+    }
+
+    &.github,
+    &.discord {
+      padding: 0.5em 1em 0.5em 0.5em;
     }
   }
 }
