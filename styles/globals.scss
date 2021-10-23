@@ -18,10 +18,12 @@ a {
     padding: 0.5em 1em;
     transition: all 0.2s ease-out;
     margin: 0 0.3em;
+    background-color: #3d59a1;
+    color: #1f2335;
+    border: 1px solid #3d59a1;
     &:hover {
-      color: #1f2335;
-      background-color: #3d59a1;
-      border: 1px solid #3d59a1;
+      background-color: #1f2335;
+      color: #3d59a1;
     }
 
     &.github,
