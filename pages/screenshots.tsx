@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import { Title, ScreenshotImages } from '../components'
 import styles from '../styles/Home.module.scss'
 
 const Screenshots: NextPage = () => {
@@ -12,14 +13,13 @@ const Screenshots: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          💫 CosmicNvim
-        </h1>
+        <Title />
 
         <p className={styles.description}>
-          ---DISPLAY SCREENSHOTS---
+          📷 Screenshots
         </p>
 
+        <ScreenshotImages showAll={true} />
       </main>
     </div>
   )

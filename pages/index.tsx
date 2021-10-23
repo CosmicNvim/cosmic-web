@@ -1,7 +1,8 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.scss'
+import type { NextPage } from "next";
+import Head from "next/head";
+import Link from "next/link";
+import { Title, ScreenshotImages } from "../components";
+import styles from "../styles/Home.module.scss";
 
 const Home: NextPage = () => {
   return (
@@ -9,32 +10,39 @@ const Home: NextPage = () => {
       <Head>
         <title>Cosmic Neovim</title>
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="description" content="CosmicNvim is a lightweight and opinionated Neovim config for web development, specifically designed to provide a 💫 COSMIC programming experience!" />
-        <meta name='viewport' content="width=device-width, initial-scale=1" />
+        <meta
+          name="description"
+          content="CosmicNvim is a lightweight and opinionated Neovim config for web development, specifically designed to provide a 💫 COSMIC programming experience!"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/cosmic.ico" />
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          💫 CosmicNvim
-        </h1>
+        <Title />
 
         <p className={styles.description}>
-          CosmicNvim is a lightweight and opinionated Neovim config for web development, specifically designed to provide a 💫 COSMIC programming experience!
+          CosmicNvim is a lightweight and opinionated Neovim config for web
+          development, specifically designed to provide a 💫 COSMIC programming
+          experience!
         </p>
 
         <div className={styles.install}>
-          <a className="button" href="https://github.com/mattleong/CosmicNvim/wiki/Installation">Install</a>
+          <a
+            className="button"
+            href="https://github.com/mattleong/CosmicNvim/wiki/Installation"
+          >
+            Install
+          </a>
         </div>
 
-        <div className="screenshots">
-          <div className="screenshot">
-            <Image src="/screenshots/hover.png" layout="intrinsic" width={1200} height={600} alt="" />
-          </div>
-        </div>
+        <ScreenshotImages />
+
+        <Link href="/screenshots">See more screenshots</Link>
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+
+export default Home;

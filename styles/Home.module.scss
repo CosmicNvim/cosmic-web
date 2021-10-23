@@ -5,7 +5,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
 .main {
@@ -22,6 +21,12 @@
   line-height: 1.15;
   font-size: 4rem;
   color: #7aa2f7;
+  a {
+    color: #7aa2f7;
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 
 .title,
