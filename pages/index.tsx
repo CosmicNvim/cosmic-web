@@ -7,9 +7,11 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>💫 Cosmic Neovim</title>
+        <title>Cosmic Neovim</title>
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="description" content="CosmicNvim is a lightweight and opinionated Neovim config for web development, specifically designed to provide a 💫 COSMIC programming experience!" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta name='viewport' content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/cosmic.ico" />
       </Head>
 
       <main className={styles.main}>
