@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
 
-const Home: NextPage = () => {
+const Screenshots: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
@@ -17,15 +17,12 @@ const Home: NextPage = () => {
         </h1>
 
         <p className={styles.description}>
-          CosmicNvim is a lightweight and opinionated Neovim config for web development, specifically designed to provide a 💫 COSMIC programming experience!
+          ---DISPLAY SCREENSHOTS---
         </p>
 
-        <div>
-          <a className="button" href="https://github.com/mattleong/CosmicNvim/wiki/Installation">Install</a>
-        </div>
       </main>
     </div>
   )
 }
 
-export default Home
+export default Screenshots
