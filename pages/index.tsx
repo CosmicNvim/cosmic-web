@@ -52,8 +52,21 @@ const Home: NextPage = () => {
         </div>
 
         <ScreenshotImages count={!showMore ? 1 : null} />
-        {!showMore && (
-          <a className="button reversed" onClick={() => setShowMore(true)}>See more screenshots</a>
+        {!showMore ? (
+          <a className="button reversed" onClick={() => setShowMore(true)}>
+            See more screenshots
+          </a>
+        ) : (
+          <a
+            className="button reversed"
+            onClick={() => {
+              window.scroll({
+                top: 0,
+                left: 0,
+                behavior: "smooth",
+              });
+            }}
+          >Back to top</a>
         )}
       </main>
     </div>
