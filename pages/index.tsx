@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import { Title, ScreenshotImages, Head, DiscordIcon, GithubIcon, StatsCounter } from '../components'
+import { Title, ScreenshotImages, Head, DiscordIcon, GithubIcon } from '../components'
 import styles from "../styles/Home.module.scss";
 
 const Home: NextPage = () => {
@@ -35,7 +35,6 @@ const Home: NextPage = () => {
 
         <Link href="/screenshots">See more screenshots</Link>
       </main>
-      <StatsCounter />
     </div>
   );
 };
