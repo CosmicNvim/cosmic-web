@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { Title, ScreenshotImages, Head } from '../components'
+import { Title, ScreenshotImages, Head, StatsCounter } from '../components'
 import styles from '../styles/Home.module.scss'
 
 const Screenshots: NextPage = () => {
@@ -16,6 +16,7 @@ const Screenshots: NextPage = () => {
 
         <ScreenshotImages showAll={true} />
       </main>
+      <StatsCounter />
     </div>
   )
 }
