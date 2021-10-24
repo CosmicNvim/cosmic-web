@@ -44,7 +44,7 @@ const Home: NextPage = () => {
 
         <div className={styles.install}>
           <a
-            className="button"
+            className="button install-button"
             href="https://github.com/mattleong/CosmicNvim/wiki/Installation"
           >
             Install

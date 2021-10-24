@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 type TProps = {
-  count?: number|null;
+  count?: number | null;
 };
 
 type ImageProps = {
@@ -63,13 +63,15 @@ export function ScreenshotImages({ count }: TProps) {
             return (
               <div key={key} className="screenshot">
                 <p>{image.label}</p>
-                <Image
-                  src={key}
-                  layout="intrinsic"
-                  width={image.width}
-                  height={image.height}
-                  alt={image.alt}
-                />
+                <div className="image-wrapper">
+                  <Image
+                    src={key}
+                    layout="intrinsic"
+                    width={image.width}
+                    height={image.height}
+                    alt={image.alt}
+                  />
+                </div>
               </div>
             );
           })
