@@ -1,9 +1,17 @@
 import type { NextPage } from "next";
-import Link from "next/link";
-import { Title, ScreenshotImages, Head, DiscordIcon, GithubIcon } from '../components'
+import { useState } from "react";
+import {
+  Title,
+  ScreenshotImages,
+  Head,
+  DiscordIcon,
+  GithubIcon,
+} from "../components";
 import styles from "../styles/Home.module.scss";
 
 const Home: NextPage = () => {
+  const [showMore, setShowMore] = useState(false);
+
   return (
     <div className={styles.container}>
       <Head />
@@ -18,8 +26,20 @@ const Home: NextPage = () => {
         </p>
 
         <div className="buttons">
-          <a className="button discord" href="https://discord.gg/EwdrKzVbvJ" target="_blank" rel="noreferrer"><DiscordIcon /></a>
-          <a className="button github" href="https://github.com/mattleong/CosmicNvim"><GithubIcon /></a>
+          <a
+            className="button discord"
+            href="https://discord.gg/EwdrKzVbvJ"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <DiscordIcon />
+          </a>
+          <a
+            className="button github"
+            href="https://github.com/mattleong/CosmicNvim"
+          >
+            <GithubIcon />
+          </a>
         </div>
 
         <div className={styles.install}>
@@ -31,13 +51,13 @@ const Home: NextPage = () => {
           </a>
         </div>
 
-        <ScreenshotImages />
-
-        <Link href="/screenshots">See more screenshots</Link>
+        <ScreenshotImages count={!showMore ? 1 : null} />
+        {!showMore && (
+          <a className="button reversed" onClick={() => setShowMore(true)}>See more screenshots</a>
+        )}
       </main>
     </div>
   );
 };
-
 
 export default Home;

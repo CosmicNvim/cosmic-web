@@ -11,6 +11,9 @@ body {
 a {
   color: #3d59a1;
   text-decoration: none;
+  &:hover {
+    cursor: pointer;
+  }
   &.button {
     display: inline-block;
     border: 1px solid;
@@ -24,6 +27,15 @@ a {
     &:hover {
       background-color: #1f2335;
       color: #3d59a1;
+    }
+
+    &.reversed {
+      background-color: #1f2335;
+      color: #3d59a1;
+      &:hover {
+        background-color: #3d59a1;
+        color: #1f2335;
+      }
     }
   }
 }
@@ -42,6 +54,10 @@ a {
   display: flex;
   flex-direction: column;
   text-align: center;
+
+  .description {
+    font-size: 1.35em;
+  }
 
   .screenshot {
     margin: 1em 0 2em;
