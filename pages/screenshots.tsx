@@ -5,7 +5,7 @@ import styles from '../styles/Home.module.scss'
 const Screenshots: NextPage = () => {
   return (
     <div className={styles.container}>
-      <Head />
+      <Head title='CosmicNvim - Screenshots' />
 
       <main className={styles.main}>
         <Title />
