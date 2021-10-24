@@ -17,9 +17,9 @@ const Home: NextPage = () => {
           experience!
         </p>
 
-        <div>
-          <a className="button discord" href="https://discord.gg/EwdrKzVbvJ" target="_blank" rel="noreferrer"><DiscordIcon /> Discord</a>
-          <a className="button github" href="https://github.com/mattleong/CosmicNvim"><GithubIcon /> Github</a>
+        <div className="buttons">
+          <a className="button discord" href="https://discord.gg/EwdrKzVbvJ" target="_blank" rel="noreferrer"><DiscordIcon /></a>
+          <a className="button github" href="https://github.com/mattleong/CosmicNvim"><GithubIcon /></a>
         </div>
 
         <div className={styles.install}>
