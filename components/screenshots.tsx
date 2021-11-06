@@ -14,39 +14,45 @@ type ImageProps = {
 };
 
 const images: ImageProps = {
-  "/screenshots/hover.png": {
-    label: "Hover",
-    width: 1200,
+  "/screenshots/dashboard.png": {
+    label: "Dashboard",
+    width: 1000,
     height: 600,
     alt: "",
   },
-  "/screenshots/reference.png": {
+  "/screenshots/hover.png": {
+    label: "Hover",
+    width: 1000,
+    height: 600,
+    alt: "",
+  },
+  "/screenshots/references.png": {
     label: "Find Reference",
-    width: 1200,
+    width: 1000,
     height: 600,
     alt: "",
   },
   "/screenshots/rename.png": {
     label: "Rename",
-    width: 800,
-    height: 600,
+    width: 600,
+    height: 200,
     alt: "",
   },
   "/screenshots/find_files.png": {
     label: "Find Files",
-    width: 1200,
+    width: 1000,
     height: 600,
     alt: "",
   },
   "/screenshots/code_action.png": {
     label: "Code Action",
-    width: 900,
+    width: 1000,
     height: 600,
     alt: "",
   },
   "/screenshots/terminal.png": {
     label: "Floating Terminal",
-    width: 1200,
+    width: 1000,
     height: 600,
     alt: "",
   },

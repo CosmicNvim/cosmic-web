@@ -15,7 +15,6 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head />
-
       <main className={styles.main}>
         <Title />
 
@@ -66,7 +65,9 @@ const Home: NextPage = () => {
                 behavior: "smooth",
               });
             }}
-          >Back to top</a>
+          >
+            Back to top
+          </a>
         )}
       </main>
     </div>
