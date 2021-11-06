@@ -35,7 +35,13 @@ const images: ImageProps = {
   "/screenshots/rename.png": {
     label: "Rename",
     width: 600,
-    height: 200,
+    height: 210,
+    alt: "",
+  },
+  "/screenshots/rename_notification.png": {
+    label: "Rename Notification",
+    width: 1000,
+    height: 600,
     alt: "",
   },
   "/screenshots/find_files.png": {
