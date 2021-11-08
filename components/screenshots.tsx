@@ -20,6 +20,30 @@ const images: ImageProps = {
     height: 600,
     alt: "",
   },
+  "/screenshots/normal.png": {
+    label: "Normal",
+    width: 1000,
+    height: 13,
+    alt: "",
+  },
+  "/screenshots/insert.png": {
+    label: "Insert",
+    width: 1000,
+    height: 13,
+    alt: "",
+  },
+  "/screenshots/visual.png": {
+    label: "Visual",
+    width: 1000,
+    height: 9,
+    alt: "",
+  },
+  "/screenshots/replace.png": {
+    label: "Replace",
+    width: 1000,
+    height: 13,
+    alt: "",
+  },
   "/screenshots/hover.png": {
     label: "Hover",
     width: 1000,
