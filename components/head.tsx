@@ -6,8 +6,8 @@ type TProps = {
   title?: string;
 };
 
-const AnalyticsProvider: FC = ({ children }) => {
-  return (
+const Analytics: FC = () => {
+  return process.env.NODE_ENV === 'production' ? (
     <>
       <Script
         strategy="afterInteractive"
@@ -25,6 +25,16 @@ const AnalyticsProvider: FC = ({ children }) => {
           `,
         }}
       />
+    </>
+  ) : (
+    <></>
+  );
+};
+
+const AnalyticsProvider: FC = ({ children }) => {
+  return (
+    <>
+      <Analytics />
       {children}
     </>
   );
