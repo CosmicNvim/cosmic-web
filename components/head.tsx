@@ -1,57 +1,48 @@
-// import { useEffect } from "react";
-import { default as NextHead } from "next/head";
+import type { FC } from 'react';
+import { default as NextHead } from 'next/head';
+import Script from 'next/script';
 
 type TProps = {
   title?: string;
 };
 
-export function Head({ title = "CosmicNvim - Home" }: TProps) {
-  // useEffect(() => {
-  //   (window.heap = window.heap || []),
-  //     (heap.load = function (e, t) {
-  //       (window.heap.appid = e), (window.heap.config = t = t || {});
-  //       var r = document.createElement("script");
-  //       (r.type = "text/javascript"),
-  //         (r.async = !0),
-  //         (r.src = "https://cdn.heapanalytics.com/js/heap-" + e + ".js");
-  //       var a = document.getElementsByTagName("script")[0];
-  //       a.parentNode.insertBefore(r, a);
-  //       for (
-  //         var n = function (e) {
-  //             return function () {
-  //               heap.push([e].concat(Array.prototype.slice.call(arguments, 0)));
-  //             };
-  //           },
-  //           p = [
-  //             "addEventProperties",
-  //             "addUserProperties",
-  //             "clearEventProperties",
-  //             "identify",
-  //             "resetIdentity",
-  //             "removeEventProperty",
-  //             "setEventProperties",
-  //             "track",
-  //             "unsetEventProperty",
-  //           ],
-  //           o = 0;
-  //         o < p.length;
-  //         o++
-  //       )
-  //         heap[p[o]] = n(p[o]);
-  //     });
-  //   ///@ts-ignore
-  //   heap.load(process.env.NEXT_PUBLIC_HEAP_ID);
-  // }, []);
+const AnalyticsProvider: FC = ({ children }) => {
   return (
-    <NextHead>
-      <title>{title}</title>
-      <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-      <meta
-        name="description"
-        content="CosmicNvim is a lightweight and opinionated Neovim config for web development, specifically designed to provide a 💫 COSMIC programming experience!"
+    <>
+      <Script
+        strategy="afterInteractive"
+        src="https://www.googletagmanager.com/gtag/js?id=G-1X4HBFG260"
       />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <link rel="icon" href="/favicon.ico" />
-    </NextHead>
+      <Script
+        id="ga"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-1X4HBFG260');
+          `,
+        }}
+      />
+      {children}
+    </>
+  );
+};
+
+export function Head({ title = 'CosmicNvim - Home' }: TProps) {
+  return (
+    <AnalyticsProvider>
+      <NextHead>
+        <title>{title}</title>
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta
+          name="description"
+          content="CosmicNvim is a lightweight and opinionated Neovim config for web development, specifically designed to provide a 💫 COSMIC programming experience!"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </NextHead>
+    </AnalyticsProvider>
   );
 }
