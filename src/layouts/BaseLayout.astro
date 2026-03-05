@@ -1,0 +1,56 @@
+---
+import Analytics from '@vercel/analytics/astro';
+import '../styles/global.scss';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'CosmicNvim | The cosmic Neovim setup for web developers',
+  description = 'CosmicNvim is a focused Neovim setup for web development with a fast workflow, polished defaults, and a strong visual identity.',
+} = Astro.props;
+
+const gaId = 'G-1X4HBFG260';
+const isProd = import.meta.env.PROD;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#1f2335" />
+    <link rel="icon" href="/favicon.ico" />
+    <title>{title}</title>
+
+    {
+      isProd && (
+        <>
+          <script
+            is:inline
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+          />
+          <script
+            is:inline
+            set:html={`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${gaId}');
+          `}
+          />
+        </>
+      )
+    }
+  </head>
+
+  <body>
+    <div class="noise-overlay" aria-hidden="true"></div>
+    <slot />
+    <Analytics />
+  </body>
+</html>

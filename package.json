@@ -1,25 +1,30 @@
 {
   "name": "cosmic-web",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
+  "packageManager": "pnpm@10.30.3",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "lint": "oxlint . --config .oxlintrc.json",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
-    "next": "^12.0.1",
-    "prettier": "^2.6.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "sass": "^1.43.3"
+    "@astrojs/vercel": "^9.0.4",
+    "@vercel/analytics": "^1.6.1",
+    "astro": "^5.18.0",
+    "sass": "^1.97.3"
   },
   "devDependencies": {
-    "@types/node": "^17.0.23",
-    "@types/react": "17.0.31",
-    "eslint": "7.32.0",
-    "eslint-config-next": "11.1.2",
-    "typescript": "4.4.4"
+    "@astrojs/check": "^0.9.6",
+    "eslint": "^9.39.3",
+    "eslint-plugin-astro": "^1.6.0",
+    "oxlint": "^1.51.0",
+    "prettier": "^3.8.1",
+    "prettier-plugin-astro": "^0.14.1",
+    "typescript": "^5.9.3"
   }
 }

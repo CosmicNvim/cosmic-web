@@ -1,0 +1,173 @@
+---
+const screenshots = [
+  {
+    src: '/screenshots/dashboard.png',
+    label: 'Dashboard',
+    alt: 'CosmicNvim dashboard with startup shortcuts and branding.',
+    width: 1000,
+    height: 600,
+  },
+  {
+    src: '/screenshots/hover.png',
+    label: 'Hover Documentation',
+    alt: 'Floating hover documentation panel inside Neovim.',
+    width: 1000,
+    height: 600,
+  },
+  {
+    src: '/screenshots/find_files.png',
+    label: 'File Search',
+    alt: 'Fuzzy finder interface for quickly locating files in a project.',
+    width: 1000,
+    height: 600,
+  },
+  {
+    src: '/screenshots/code_action.png',
+    label: 'Code Actions',
+    alt: 'Code action picker with available refactors and quick fixes.',
+    width: 1000,
+    height: 600,
+  },
+  {
+    src: '/screenshots/references.png',
+    label: 'Find References',
+    alt: 'Reference search results for symbols in the current workspace.',
+    width: 1000,
+    height: 600,
+  },
+  {
+    src: '/screenshots/rename.png',
+    label: 'Rename Prompt',
+    alt: 'Rename input prompt for changing a symbol name.',
+    width: 600,
+    height: 210,
+  },
+  {
+    src: '/screenshots/rename_notification.png',
+    label: 'Rename Result',
+    alt: 'Notification showing successful rename updates across files.',
+    width: 1000,
+    height: 600,
+  },
+  {
+    src: '/screenshots/terminal.png',
+    label: 'Floating Terminal',
+    alt: 'Terminal panel floating over Neovim for command execution.',
+    width: 1000,
+    height: 600,
+  },
+  {
+    src: '/screenshots/normal.png',
+    label: 'Normal Mode',
+    alt: 'Statusline styling in normal mode.',
+    width: 1000,
+    height: 13,
+  },
+  {
+    src: '/screenshots/insert.png',
+    label: 'Insert Mode',
+    alt: 'Statusline styling in insert mode.',
+    width: 1000,
+    height: 13,
+  },
+  {
+    src: '/screenshots/visual.png',
+    label: 'Visual Mode',
+    alt: 'Statusline styling in visual mode.',
+    width: 1000,
+    height: 9,
+  },
+  {
+    src: '/screenshots/replace.png',
+    label: 'Replace Mode',
+    alt: 'Statusline styling in replace mode.',
+    width: 1000,
+    height: 13,
+  },
+];
+
+const collapsedCount = 4;
+---
+
+<section class="gallery-panel" id="screenshots" data-gallery>
+  <div class="panel-header">
+    <p class="panel-kicker">Gallery</p>
+    <h2>See CosmicNvim in action</h2>
+    <p>
+      The core workflow is tuned for speed: searching, navigation, code actions,
+      and symbol tools all stay one keypress away.
+    </p>
+    <button type="button" class="cta-pill ghost" data-gallery-toggle>
+      Reveal full gallery
+    </button>
+  </div>
+
+  <div class="gallery-grid">
+    {
+      screenshots.map((shot, index) => (
+        <figure
+          class="gallery-item"
+          data-gallery-item
+          data-initial={index >= collapsedCount ? 'hidden' : 'visible'}
+          style={`--item-delay:${index * 80}ms;`}
+        >
+          <img
+            src={shot.src}
+            alt={shot.alt}
+            width={shot.width}
+            height={shot.height}
+            loading={index < 2 ? 'eager' : 'lazy'}
+            decoding="async"
+          />
+          <figcaption>{shot.label}</figcaption>
+        </figure>
+      ))
+    }
+  </div>
+</section>
+
+<script is:inline>
+  (() => {
+    const gallery = document.querySelector('[data-gallery]');
+    if (!gallery) return;
+
+    const toggle = gallery.querySelector('[data-gallery-toggle]');
+    const items = [...gallery.querySelectorAll('[data-gallery-item]')];
+    const hiddenItems = items.filter(
+      (item) => item.dataset.initial === 'hidden',
+    );
+    let expanded = false;
+
+    const collapse = () => {
+      hiddenItems.forEach((item) => {
+        item.hidden = true;
+        item.classList.remove('revealed');
+      });
+      if (toggle) toggle.textContent = 'Reveal full gallery';
+    };
+
+    const expand = () => {
+      hiddenItems.forEach((item, index) => {
+        item.hidden = false;
+        window.setTimeout(() => {
+          item.classList.add('revealed');
+        }, index * 70);
+      });
+      if (toggle) toggle.textContent = 'Collapse gallery';
+    };
+
+    collapse();
+
+    toggle?.addEventListener('click', () => {
+      expanded = !expanded;
+
+      if (expanded) {
+        expand();
+        return;
+      }
+
+      collapse();
+      gallery.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  })();
+</script>

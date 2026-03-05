@@ -1,8 +1,13 @@
 {
   "singleQuote": true,
-  "importOrder": ["^@\\w+/(.*)$", "^[./]"],
-  "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true,
-  "importOrderCaseInsensitive": true,
-  "trailingComma": "all"
+  "trailingComma": "all",
+  "plugins": ["prettier-plugin-astro"],
+  "overrides": [
+    {
+      "files": "*.astro",
+      "options": {
+        "parser": "astro"
+      }
+    }
+  ]
 }

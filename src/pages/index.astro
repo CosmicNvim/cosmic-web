@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ScreenshotGallery from '../components/ScreenshotGallery.astro';
+---
+
+<BaseLayout>
+  <main id="top" class="page-shell">
+    <section class="hero-panel" style="--enter-delay: 80ms;">
+      <p class="hero-kicker">💫 CosmicNvim</p>
+      <h1>Neovim for web developers who move fast and stay precise.</h1>
+      <p class="hero-copy">
+        CosmicNvim is an opinionated setup shaped around front-end and
+        full-stack workflows. It gives you a focused editing surface, powerful
+        defaults, and polished mode feedback without spending weekends tuning
+        your config.
+      </p>
+
+      <div class="hero-actions">
+        <a
+          class="cta-pill"
+          href="https://github.com/mattleong/CosmicNvim/wiki/Installation"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Install guide
+        </a>
+        <a
+          class="cta-pill ghost"
+          href="https://github.com/mattleong/CosmicNvim"
+          target="_blank"
+          rel="noreferrer"
+        >
+          GitHub repository
+        </a>
+        <a
+          class="cta-pill ghost"
+          href="https://discord.gg/EwdrKzVbvJ"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Join Discord
+        </a>
+      </div>
+    </section>
+
+    <section
+      class="signal-grid"
+      aria-label="Key advantages"
+      style="--enter-delay: 200ms;"
+    >
+      <article>
+        <p class="signal-index">01</p>
+        <h2>Smart defaults</h2>
+        <p>
+          LSP, fuzzy search, diagnostics, and command ergonomics are tuned for
+          modern JavaScript, TypeScript, and web stacks right away.
+        </p>
+      </article>
+      <article>
+        <p class="signal-index">02</p>
+        <h2>Fast feedback loop</h2>
+        <p>
+          Mode-aware styling and floating interfaces keep context on-screen, so
+          you read less UI chrome and make decisions faster.
+        </p>
+      </article>
+      <article>
+        <p class="signal-index">03</p>
+        <h2>Minimal friction</h2>
+        <p>
+          Skip config churn. Keep your attention on shipping features while
+          CosmicNvim keeps the editor experience cohesive.
+        </p>
+      </article>
+    </section>
+
+    <ScreenshotGallery />
+  </main>
+
+  <button
+    type="button"
+    class="back-to-top"
+    data-back-to-top
+    aria-label="Back to top"
+  >
+    ↑ Top
+  </button>
+</BaseLayout>
+
+<script is:inline>
+  (() => {
+    const button = document.querySelector('[data-back-to-top]');
+    if (!button) return;
+
+    const updateVisibility = () => {
+      button.classList.toggle('is-visible', window.scrollY > 440);
+    };
+
+    updateVisibility();
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+
+    button.addEventListener('click', () => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    });
+  })();
+</script>

@@ -9,14 +9,20 @@
   </a>
 </p>
 
-### Development
-
-First, run the development server:
+## Development
 
 ```bash
-yarn install
-
-# for local development
-yarn dev
+corepack enable
+corepack prepare pnpm@10.30.3 --activate
+pnpm install
+pnpm dev
 ```
 
+## Quality checks
+
+```bash
+pnpm lint
+pnpm format:check
+pnpm check
+pnpm build
+```
