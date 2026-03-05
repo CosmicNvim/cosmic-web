@@ -89,54 +89,197 @@ const screenshots = [
 const collapsedCount = 4;
 ---
 
-<section class="gallery-panel" id="screenshots" data-gallery>
-  <div class="panel-header">
-    <p class="panel-kicker">Gallery</p>
-    <h2>See CosmicNvim in action</h2>
-    <p>
-      The core workflow is tuned for speed: searching, navigation, code actions,
-      and symbol tools all stay one keypress away.
-    </p>
-    <button type="button" class="cta-pill ghost" data-gallery-toggle>
-      Reveal full gallery
-    </button>
-  </div>
+<div data-gallery-root>
+  <section class="gallery-panel" id="screenshots" data-gallery>
+    <div class="panel-header">
+      <p class="panel-kicker">Gallery</p>
+      <h2>See CosmicNvim in action</h2>
+      <p>
+        The core workflow is tuned for speed: searching, navigation, code
+        actions, and symbol tools all stay one keypress away.
+      </p>
+      <button type="button" class="cta-pill ghost" data-gallery-toggle>
+        Reveal full gallery
+      </button>
+    </div>
 
-  <div class="gallery-grid">
-    {
-      screenshots.map((shot, index) => (
-        <figure
-          class="gallery-item"
-          data-gallery-item
-          data-initial={index >= collapsedCount ? 'hidden' : 'visible'}
-          style={`--item-delay:${index * 80}ms;`}
-        >
+    <div class="gallery-grid">
+      {
+        screenshots.map((shot, index) => (
+          <figure
+            class="gallery-item"
+            data-gallery-item
+            data-gallery-index={index}
+            data-initial={index >= collapsedCount ? 'hidden' : 'visible'}
+            style={`--item-delay:${index * 80}ms;`}
+          >
+            <button
+              type="button"
+              class="gallery-image-button"
+              data-gallery-open
+              data-gallery-index={index}
+              aria-label={`Open ${shot.label}`}
+            >
+              <img
+                src={shot.src}
+                data-src={shot.src}
+                alt={shot.alt}
+                width={shot.width}
+                height={shot.height}
+                loading={index < 2 ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+            </button>
+            <figcaption>{shot.label}</figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </section>
+
+  <div class="gallery-modal" data-gallery-modal hidden>
+    <div
+      class="gallery-modal__dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="gallery-modal-caption"
+    >
+      <button
+        type="button"
+        class="gallery-modal__close"
+        data-gallery-modal-close
+        aria-label="Close modal"
+      >
+        ✕
+      </button>
+
+      <button
+        type="button"
+        class="gallery-modal__nav gallery-modal__nav--prev"
+        data-gallery-modal-prev
+        aria-label="Previous screenshot"
+      >
+        ←
+      </button>
+
+      <figure class="gallery-modal__figure">
+        <div class="gallery-modal__media">
           <img
-            src={shot.src}
-            alt={shot.alt}
-            width={shot.width}
-            height={shot.height}
-            loading={index < 2 ? 'eager' : 'lazy'}
+            src=""
+            alt=""
+            data-gallery-modal-image
+            class="gallery-modal__image"
+            loading="eager"
             decoding="async"
           />
-          <figcaption>{shot.label}</figcaption>
-        </figure>
-      ))
-    }
+        </div>
+        <figcaption id="gallery-modal-caption" data-gallery-modal-caption>
+        </figcaption>
+      </figure>
+
+      <button
+        type="button"
+        class="gallery-modal__nav gallery-modal__nav--next"
+        data-gallery-modal-next
+        aria-label="Next screenshot"
+      >
+        →
+      </button>
+    </div>
   </div>
-</section>
+</div>
 
 <script is:inline>
   (() => {
     const gallery = document.querySelector('[data-gallery]');
     if (!gallery) return;
+    const galleryRoot = gallery.closest('[data-gallery-root]');
+    if (!galleryRoot) return;
 
     const toggle = gallery.querySelector('[data-gallery-toggle]');
     const items = [...gallery.querySelectorAll('[data-gallery-item]')];
+    const openButtons = [...gallery.querySelectorAll('[data-gallery-open]')];
     const hiddenItems = items.filter(
       (item) => item.dataset.initial === 'hidden',
     );
+
+    const modal = galleryRoot.querySelector('[data-gallery-modal]');
+    const modalImage = galleryRoot.querySelector('[data-gallery-modal-image]');
+    const modalCaption = galleryRoot.querySelector(
+      '[data-gallery-modal-caption]',
+    );
+    const modalPrev = galleryRoot.querySelector('[data-gallery-modal-prev]');
+    const modalNext = galleryRoot.querySelector('[data-gallery-modal-next]');
+    const modalClose = galleryRoot.querySelector('[data-gallery-modal-close]');
+
+    if (!modal || !modalImage || !modalCaption) return;
+
+    const shots = items.map((item, index) => {
+      const image = item.querySelector('img');
+      const caption = item.querySelector('figcaption');
+
+      return {
+        index,
+        src: image?.dataset.src || image?.getAttribute('src') || '',
+        alt: image?.getAttribute('alt') || '',
+        label: caption?.textContent?.trim() || `Screenshot ${index + 1}`,
+      };
+    });
+
     let expanded = false;
+    let activeIndex = 0;
+    let modalOpen = false;
+    let lastTrigger = null;
+
+    const getFocusableElements = () => {
+      const selectors =
+        'button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])';
+
+      return [...modal.querySelectorAll(selectors)].filter(
+        (element) =>
+          !element.hasAttribute('disabled') &&
+          element.getAttribute('aria-hidden') !== 'true',
+      );
+    };
+
+    const updateModalContent = (index) => {
+      if (shots.length === 0) return;
+      activeIndex = (index + shots.length) % shots.length;
+      const shot = shots[activeIndex];
+
+      modalImage.src = shot.src;
+      modalImage.alt = shot.alt || shot.label;
+      modalCaption.textContent = `${shot.label} (${activeIndex + 1}/${shots.length})`;
+    };
+
+    const closeImageModal = () => {
+      if (!modalOpen) return;
+      modal.hidden = true;
+      modal.classList.remove('is-open');
+      document.body.classList.remove('modal-open');
+      modalOpen = false;
+
+      if (lastTrigger instanceof HTMLElement) {
+        lastTrigger.focus();
+      }
+
+      lastTrigger = null;
+    };
+
+    const openImageModal = (index, trigger) => {
+      updateModalContent(index);
+      modal.hidden = false;
+      modal.classList.add('is-open');
+      document.body.classList.add('modal-open');
+      modalOpen = true;
+      lastTrigger = trigger;
+
+      window.setTimeout(() => {
+        if (modalClose instanceof HTMLElement) {
+          modalClose.focus();
+        }
+      }, 0);
+    };
 
     const collapse = () => {
       hiddenItems.forEach((item) => {
@@ -148,6 +291,13 @@ const collapsedCount = 4;
 
     const expand = () => {
       hiddenItems.forEach((item, index) => {
+        const image = item.querySelector('img');
+        if (image) {
+          image.loading = 'eager';
+          image.fetchPriority = 'high';
+          image.src = image.dataset.src || image.src;
+        }
+
         item.hidden = false;
         window.setTimeout(() => {
           item.classList.add('revealed');
@@ -168,6 +318,72 @@ const collapsedCount = 4;
 
       collapse();
       gallery.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    openButtons.forEach((button, index) => {
+      button.addEventListener('click', () => {
+        openImageModal(index, button);
+      });
+    });
+
+    modalPrev?.addEventListener('click', () => {
+      updateModalContent(activeIndex - 1);
+    });
+
+    modalNext?.addEventListener('click', () => {
+      updateModalContent(activeIndex + 1);
+    });
+
+    modalClose?.addEventListener('click', () => {
+      closeImageModal();
+    });
+
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        closeImageModal();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (!modalOpen) return;
+
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeImageModal();
+        return;
+      }
+
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        updateModalContent(activeIndex - 1);
+        return;
+      }
+
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        updateModalContent(activeIndex + 1);
+        return;
+      }
+
+      if (event.key !== 'Tab') return;
+
+      const focusables = getFocusableElements();
+      if (focusables.length === 0) return;
+
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const current = document.activeElement;
+
+      if (event.shiftKey && current === first) {
+        event.preventDefault();
+        last.focus();
+        return;
+      }
+
+      if (!event.shiftKey && current === last) {
+        event.preventDefault();
+        first.focus();
+      }
     });
   })();
 </script>
