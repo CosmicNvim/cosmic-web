@@ -13,13 +13,13 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
-    "@astrojs/vercel": "^9.0.4",
+    "@astrojs/vercel": "^10.0.0",
     "@vercel/analytics": "^1.6.1",
-    "astro": "^5.18.0",
+    "astro": "^6.0.4",
     "sass": "^1.97.3"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.6",
+    "@astrojs/check": "^0.9.7",
     "eslint": "^9.39.3",
     "eslint-plugin-astro": "^1.6.0",
     "oxlint": "^1.51.0",
